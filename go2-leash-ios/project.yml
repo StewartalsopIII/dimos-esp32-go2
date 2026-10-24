@@ -1,0 +1,37 @@
+name: Go2Leash
+options:
+  bundleIdPrefix: org.aiwhisperers
+  deploymentTarget:
+    iOS: "17.0"
+packages:
+  WebRTC:
+    url: https://github.com/stasel/WebRTC
+    exactVersion: 125.0.0
+targets:
+  Go2Leash:
+    type: application
+    platform: iOS
+    sources: [Sources]
+    dependencies:
+      - package: WebRTC
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: org.aiwhisperers.Go2Leash
+        DEVELOPMENT_TEAM: "" # set your own Apple team ID
+        CODE_SIGN_STYLE: Automatic
+        TARGETED_DEVICE_FAMILY: "1"
+        SWIFT_VERSION: "5.0"
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_CFBundleDisplayName: Go2 Leash
+        INFOPLIST_KEY_NSLocalNetworkUsageDescription: Connects directly to the Go2 robot on its own Wi-Fi.
+        INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription: Listens to the ESP32 leash board's button and gestures.
+        INFOPLIST_KEY_NSCameraUsageDescription: Films the robot from inside the app so the leash stays connected.
+        INFOPLIST_KEY_NSMicrophoneUsageDescription: Records sound with your robot videos.
+        INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription: Saves your robot videos to Photos.
+    info:
+      path: Sources/Info.plist
+      properties:
+        NSAppTransportSecurity:
+          NSAllowsLocalNetworking: true
+          NSAllowsArbitraryLoads: true

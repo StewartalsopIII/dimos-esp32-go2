@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dimos-esp32"
+version = "0.1.0"
+description = "An ESP32 over Bluetooth as a dimOS input, plus Go2 lie-down / stand-up from its gestures."
+license = "MIT"
+requires-python = ">=3.10,<3.13"
+dependencies = ["bleak>=3.0,<4"]
+
+[project.optional-dependencies]
+# dimOS itself is installed separately, e.g. dimos[unitree]==0.0.14.
+test = ["pytest"]
+
+[project.entry-points."dimos.blueprints"]
+gestures = "dimos_esp32.blueprints:gesture_blueprint"
+gesture-go2 = "dimos_esp32.blueprints:gesture_go2_blueprint"
+
+[tool.setuptools]
+packages = ["dimos_esp32"]
